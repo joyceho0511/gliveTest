@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login GIGA Live</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                <form class="login100-form validate-form">
+                <span class="login100-form-title p-b-55">Login GIGA Live </span>
+                <div class="input-group p-b-30">
+                    <select class="custom-select drplogin col-12"  id="inputGroupSelectid" >
+                        
+                        <option value="1" selected>AD網域認證</option>
+                        <option value="2">工號身分證字號驗證</option>
+                        <option value="3">OpenLDAP(Email)</option>
+                    </select>
+                </div>
+
+<!--                <div class="alert  alert-light" role="alert">
+                    請使用您的 開機帳號及密碼(AD帳密)登入
+                </div>-->
+                <div class="input-group" id="div_adcmp" >
+                    <select class="custom-select col-12"  id="ad_comp">
+                        <option selected>選擇公司</option>
+                        <option value="1" selected>GIGABYTE</option>
+                        <option value="2">NP</option>
+                        <option value="3">GBC</option>
+                        <option value="4">DG</option>
+                        <option value="5">CN</option>
+                        <option value="6">NB</option>
+                    </select>
+                    <br />
+                    <br />
+                </div>
+                <div id="inputid_errormsg" class="wrap-input100 validate-input m-b-16" data-validate="開機帳號為必填 ex:amy.lu">
+                    <input id="inputid" class="input100" type="text" name="userid" placeholder="帳號 ( 開機帳號 )">
+                    <span class="focus-input100"></span><span class="symbol-input100"><span id="inputiconid"
+                        class="lnr lnr-user"></span></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="密碼為必填">
+                    <input id="inputpsd" class="input100" type="password" name="inputpsd" placeholder="密碼 ( 開機密碼 )">
+                    <span class="focus-input100"></span><span class="symbol-input100"><span class="lnr lnr-lock">
+                    </span></span>
+                </div>
+                <div class="contact100-form-checkbox m-l-4">
+                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                    <label class="label-checkbox100" for="ckb1">
+                        保持我的登入狀態(公用電腦不建議)
+                    </label>
+                </div>
+                <div class="container-login100-form-btn p-t-25">
+                    <button class="login100-form-btn">
+                        Login
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--===============================================================================================-->
+
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
+    <!--===============================================================================================-->
+
+    <script src="vendor/bootstrap/js/popper.js"></script>
+
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--===============================================================================================-->
+
+    <script src="vendor/select2/select2.min.js"></script>
+
+    <!--===============================================================================================-->
+
+    <script src="js/main_login.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            //認證方式下拉改變   
+            $('#inputGroupSelectid').change(function() {
+                var selectedlogin = $(this).children('option:selected').val();
+                var p2 = $('#param2').val();
+
+                $("#inputid").focus();
+
+                switch (selectedlogin) {
+                    case '1': //AD網域認證
+                        $("#div_adcmp").show();
+                        $("#inputid").attr("placeholder", '帳號 ( 開機帳號 )');
+                        $("#inputiconid").attr("class", "lnr lnr-user");
+                        $("#inputpsd").attr("placeholder", "密碼 ( 開機密碼 )");
+                        $("#inputid_errormsg").attr("data-validate", "開機帳號為必填 ex:amy.lu");
+                        $("#inputid").attr("name", "userid");
+                        
+                        break;
+                    case '2': //工號身分證字號驗證
+                        $("#div_adcmp").hide();
+           
+                        $("#inputid").attr("placeholder", '帳號 ( 工號 )');
+                        $("#inputiconid").attr("class", "lnr lnr-user");
+                        $("#inputpsd").attr("placeholder", "密碼 ( 身分證字號 )");
+                        $("#inputid_errormsg").attr("data-validate", "工號為必填 ex:100218");
+                        $("#inputid").attr("name", "userid");
+
+                        break;
+
+
+                    case '3': //OpenLDAP(Email)
+                        $("#div_adcmp").hide();
+                        $("#inputid").attr("placeholder", "帳號 ( LDAP帳號 )");
+                        $("#inputiconid").attr("class", "lnr lnr-envelope");
+                        $("#inputpsd").attr("placeholder", "密碼 ( LDAP密碼 )");
+                        $("#inputid_errormsg").attr("data-validate", "Email為必填: amy.lu@gigabyte.com");
+                        $("#inputid").attr("name", "email");
+                        
+                        break;
+                    default:
+                        break;
+
+
+                }
+
+            })
+        })
+    </script>
+
+</body>
+</html>
